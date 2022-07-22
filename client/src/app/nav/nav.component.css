@@ -1,0 +1,7 @@
+.dropdown, .dropdown-toggle, .dropdown-item {
+  cursor: pointer;
+}
+
+.form-control {
+  margin-right: 5px;
+}

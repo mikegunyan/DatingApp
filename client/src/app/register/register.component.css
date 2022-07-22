@@ -1,0 +1,6 @@
+.btn-default {
+  background-color: rgb(180, 180, 180);
+}
+.btn-default:hover {
+  background-color: rgb(140, 140, 140);
+}
