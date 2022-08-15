@@ -1,0 +1,9 @@
+img {
+  max-height: 50px;
+  margin: 0;
+  padding: 0;
+  border: 2px solid white;
+  border-radius: 25px;
+  display: inline;
+  cursor: pointer;
+}

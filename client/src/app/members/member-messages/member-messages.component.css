@@ -1,0 +1,63 @@
+img {
+  max-height: 50px;
+  margin: 0 auto;
+  padding: 0;
+  border: 2px solid white;
+  border-radius: 25px;
+  display: inline;
+  cursor: pointer;
+}
+
+.card {
+  height: 680px;
+  width: 100%;
+}
+
+.card-body {
+  height: 620px;
+  overflow: auto;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.card-footer {
+  height: 60px;
+}
+
+.sender {
+  display: grid;
+  grid-template-columns: 10% 90%;
+  text-align: left;
+  margin-right: 25%;
+}
+
+.recipient {
+  display: grid;
+  grid-template-columns: 90% 10%;
+  text-align: right;
+  margin-left: 25%;
+}
+
+.chat-body {
+  border-radius: 25px;
+  margin: 1px;
+  padding: 10px 10px 0px 10px;
+}
+
+.left {
+  border-top-left-radius: 0px;
+  background-color: #272b30;
+}
+
+.right {
+  border-top-right-radius: 0px;
+  background-color: #515559;
+}
+
+.btn-send, .input-send {
+  height: 40px;
+}
+
+.btn-send {
+  padding: 0 10px;
+}

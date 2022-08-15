@@ -1,0 +1,39 @@
+<div class="card">
+  <div class="card-body">
+    <div *ngIf="messages?.length === 0">
+      No Messages yet
+    </div>
+    <div *ngIf="messages?.length > 0">
+      <div *ngFor="let message of messages" class="{{message.senderUsername === username ? 'sender' : 'recipient'}}">
+        <img *ngIf="message.senderUsername === username" src="{{message.senderPhotoUrl || './assets/user.png'}}" alt="{{message.senderUsername}}">
+        <div class="{{message.senderUsername === username ? 'chat-body left' : 'chat-body right'}}">
+          <div class="header">
+            <small class="text-muted">
+              <span class="fa fa-clock-o"> {{message.messageSent | timeago}}</span>
+              <span
+                class="text-danger"
+                *ngIf="!message.dateRead && message.senderUsername !== username"
+              > (unread)</span>
+              <span
+                class="text-success"
+                *ngIf="message.dateRead && message.senderUsername !== username"
+              > (read {{message.dateRead | timeago}})</span>
+            </small>
+          </div>
+          <p>{{message.content}}</p>
+        </div>
+        <img *ngIf="message.senderUsername !== username" src="{{message.senderPhotoUrl || './assets/user.png'}}" alt="{{message.senderUsername}}">
+      </div>
+    </div>
+  </div>
+  <div class="card-footer">
+    <form #messageForm="ngForm" (ngSubmit)="sendMessage()" autocomplete="off">
+      <div class="input-group">
+        <input name="message" required [(ngModel)]="messageContent" type="text" class="form-control input-sm input-send" placeholder="Write a message">
+        <div class="input-group-append">
+          <button [disabled]="!messageForm.valid" class="btn btn-primary btn-send" type="submit"><i class="fa fa-paper-plane"></i></button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
