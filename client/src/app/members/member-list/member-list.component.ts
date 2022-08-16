@@ -32,6 +32,8 @@ export class MemberListComponent implements OnInit {
   }
 
   loadMembers() {
+    if (this.userParams.minAge < 18) this.userParams.minAge = 18;
+    if (this.userParams.maxAge > 150) this.userParams.maxAge = 150;
     this.memberService.setUserParams(this.userParams);
     this.memberService.getMembers(this.userParams).subscribe(response => {
       this.members = response.result;

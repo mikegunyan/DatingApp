@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Member } from 'src/app/_models/member';
+import { Pagination } from 'src/app/_models/pagination';
 import { MembersService } from 'src/app/_services/members.service';
 
 @Component({
@@ -11,6 +12,10 @@ import { MembersService } from 'src/app/_services/members.service';
 export class MemberCardComponent implements OnInit {
   @Input() member: Member;
   @Input() isLiked: boolean;
+  @Input() predicate = 'liked';
+  @Input() pageNumber = 1;
+  @Input() pageSize = 10;
+  @Output() newMembers = new EventEmitter<Member[]>();
 
   constructor(private memberService: MembersService, private toastr: ToastrService) { }
 
@@ -23,4 +28,12 @@ export class MemberCardComponent implements OnInit {
     })
   }
 
+  deleteLike(member: Member) {
+    this.memberService.deleteLike(member.id).subscribe(() => {
+      this.toastr.success('You have unliked ' + member.knownAs);
+      this.memberService.getLikes(this.predicate, this.pageNumber, this.pageSize).subscribe(response => {
+        this.newMembers.emit(response.result);
+      })
+    })
+  }
 }

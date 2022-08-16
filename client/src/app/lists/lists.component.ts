@@ -28,6 +28,10 @@ export class ListsComponent implements OnInit {
     })
   }
 
+  updateMembers(members: Member[]) {
+    this.members = members;
+  }
+
   pageChanged(event: any) {
     this.pageNumber = event.page;
     this.loadLikes();

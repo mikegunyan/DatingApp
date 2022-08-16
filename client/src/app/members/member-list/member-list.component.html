@@ -5,11 +5,11 @@
   <form #form="ngForm" class="form-inline mb-3" (ngSubmit)="loadMembers()" autocomplete="off">
     <div class="form-group">
       <label>Age from: </label>
-      <input type="number" class="form-control ml-1" style="width: 80px;" name="minAge" [(ngModel)]="userParams.minAge">
+      <input type="number" min="18" max="150" class="form-control ml-1" style="width: 80px;" name="minAge" [(ngModel)]="userParams.minAge">
     </div>
     <div class="form-group px-2">
       <label>Age to: </label>
-      <input type="number" class="form-control ml-1" style="width: 80px;" name="maxAge" [(ngModel)]="userParams.maxAge">
+      <input type="number" min="18" max="150"  class="form-control ml-1" style="width: 80px;" name="maxAge" [(ngModel)]="userParams.maxAge">
     </div>
     <div class="form-group px-2">
       <label>Show: </label>
@@ -48,7 +48,7 @@
     <app-member-card [member]="member" [isLiked]="false"></app-member-card>
   </div>
 </div>
-<div class="d-flex justify-content-center" *ngIf="pagination">
+<div class="d-flex justify-content-center" *ngIf="pagination && members?.length > 0">
   <pagination
     [boundaryLinks]="true"
     [totalItems]="pagination.totalItems"

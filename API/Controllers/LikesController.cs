@@ -51,5 +51,20 @@ namespace API.Controllers
             Response.AddPaginationHeader(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPages);
             return Ok(users);
         }
+
+        [HttpDelete("{likedUserId}")]
+        public async Task<ActionResult> DeleteLike(int likedUserId)
+        {
+            var sourceUserId = User.GetUserId();
+            
+            var like =  await _likesRepository.GetUserLike(sourceUserId, likedUserId);
+            Console.WriteLine("-------------------------");
+            Console.WriteLine(like);
+            Console.WriteLine(sourceUserId);
+            Console.WriteLine(likedUserId);
+            Console.WriteLine("-------------------------");
+             _likesRepository.DeleteLike(like);
+            return Ok();
+        }
     }
 }
