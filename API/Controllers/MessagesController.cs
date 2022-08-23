@@ -29,8 +29,6 @@ namespace API.Controllers
       [HttpPost]
       public async Task<ActionResult<MessageDto>> CreateMessage(CreateMessageDto createMessageDto)
       {
-        Console.WriteLine("-----------------------------------");
-        Console.WriteLine(createMessageDto.Content);
           var username = User.GetUsername();
 
           if (username == createMessageDto.RecipientUsername.ToLower()) return BadRequest("Schizo!");
