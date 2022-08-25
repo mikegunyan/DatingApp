@@ -34,3 +34,14 @@
   border: 0;
   padding: 15px 0;
 }
+
+@keyframes blink {
+  0% {opacity: 0.1;}
+  50% {opacity: 1;}
+  100% {opacity: 0.1;}
+}
+
+.online {
+  animation: blink 2.5s linear infinite;
+  color: rgb(0, 255, 0);
+}
