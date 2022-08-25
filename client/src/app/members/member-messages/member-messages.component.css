@@ -1,6 +1,6 @@
 img {
   max-height: 50px;
-  margin: 0 auto;
+  margin: -25px auto 0 auto;
   padding: 0;
   border: 2px solid white;
   border-radius: 25px;
@@ -26,14 +26,14 @@ img {
 
 .sender {
   display: grid;
-  grid-template-columns: 10% 90%;
+  grid-template-columns: 10% 3% 87%;
   text-align: left;
   margin-right: 25%;
 }
 
 .recipient {
   display: grid;
-  grid-template-columns: 90% 10%;
+  grid-template-columns: 87% 3% 10%;
   text-align: right;
   margin-left: 25%;
 }
@@ -52,6 +52,32 @@ img {
 .right {
   border-top-right-radius: 0px;
   background-color: #515559;
+}
+
+.left-corner {
+  height: 25px;
+  border-top-right-radius: 25px;
+  background-color: #32383e;
+}
+
+.right-corner {
+  height: 25px;
+  border-top-left-radius: 25px;
+  background-color: #32383e;
+}
+
+.corner-left {
+  background-color: #272b30;
+  margin: 1px -1px 1px 1px;
+  height: 25px;
+  padding: 0;
+}
+
+.corner-right {
+  background-color: #515559;
+  margin: 1px 1px 1px -1px;
+  height: 25px;
+  padding: 0;
 }
 
 .btn-send, .input-send {
