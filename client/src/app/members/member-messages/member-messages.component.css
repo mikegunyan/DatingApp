@@ -15,9 +15,24 @@ img {
 
 .card-body {
   height: 620px;
-  overflow: auto;
+  overflow-y: scroll;
   display: flex;
   flex-direction: column-reverse;
+}
+
+.card-body::-webkit-scrollbar {
+  background-color: #515559;
+  width: 12px;
+}
+
+.card-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.card-body::-webkit-scrollbar-thumb {
+  background-color: #272b30;
+  border-radius: 20px;
+  border: 1px solid #515559;
 }
 
 .card-footer {
