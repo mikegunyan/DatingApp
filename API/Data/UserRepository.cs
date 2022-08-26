@@ -22,19 +22,23 @@ namespace API.Data
       _context = context;
     }
 
-    public async Task<MemberDto> GetMemberAsync(string username)
+    public async Task<MemberDto> GetMemberAsync(string username, bool isCurrentUser = false)
     {
-      return await _context.Users
-          .Where(x => x.UserName == username)
-          .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
-          .SingleOrDefaultAsync();
+        var query = _context.Users
+            .Where(x => x.UserName == username)
+            .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
+            .AsQueryable();
+
+        if (isCurrentUser) query = query.IgnoreQueryFilters();
+        return await query.FirstOrDefaultAsync();
     }
-    public async Task<PagedList<MemberDto>> GetMembersAsync(UserParams userParams)
+
+        public async Task<PagedList<MemberDto>> GetMembersAsync(UserParams userParams)
     {
       var query = _context.Users.AsQueryable();
 
       query = query.Where(u => u.UserName != userParams.CurrentUsername);
-      if (userParams.Gender != "both") query = query.Where(u => u.Gender == userParams.Gender);
+      if (userParams.Gender != "both") query = query.Where(u => u.Gender != userParams.Gender);
 
       var minDob = DateTime.Today.AddYears(- userParams.MaxAge - 1);
       var maxDob = DateTime.Today.AddYears(- userParams.MinAge);
@@ -51,6 +55,20 @@ namespace API.Data
           .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
           .AsNoTracking(),
           userParams.PageNumber, userParams.PageSize);
+    }
+
+    public async Task<IEnumerable<PhotoDto>> GetUnApprovedPhotosAsync()
+    {
+        return await _context.Photos
+            .IgnoreQueryFilters()
+            .Where(p => !p.IsApproved)
+            .Select(u => new PhotoDto
+            {
+                Id = u.Id,
+                Url = u.Url,
+                IsMain = u.IsMain,
+                IsApproved = u.IsApproved
+            }).ToListAsync();
     }
 
     public async Task<AppUser> GetUserByIdAsync(int id)

@@ -42,6 +42,7 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    console.log(this.route.data)
     this.route.data.subscribe(data => {
       this.member = data.member;
     })
@@ -71,11 +72,13 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
       big: './assets/user.png',
     }];
     for (const photo of this.member.photos) {
-      imageUrls.push({
-        small: photo?.url,
-        medium: photo?.url,
-        big: photo?.url,
-      })
+      if (photo.isApproved) {
+        imageUrls.push({
+          small: photo?.url,
+          medium: photo?.url,
+          big: photo?.url,
+        })
+      }
     }
     return imageUrls;
   }

@@ -44,7 +44,7 @@ namespace API.Controllers
     [HttpGet("{username}", Name = "GetUser")]
     public async Task<ActionResult<MemberDto>> GetUser(string username)
     {
-        return await _unitOfWork.UserRepository.GetMemberAsync(username);
+        return await _unitOfWork.UserRepository.GetMemberAsync(username, isCurrentUser: User.GetUsername() == username);
     }
 
     [HttpPut]
@@ -69,10 +69,10 @@ namespace API.Controllers
         PublicId = result.PublicId
       };
 
-      if (user.Photos.Count == 0)
-      {
-        photo.IsMain = true;
-      }
+      // if (user.Photos.Count == 0)
+      // {
+      //   photo.IsMain = true;
+      // }
 
       user.Photos.Add(photo);
 
@@ -87,7 +87,9 @@ namespace API.Controllers
     public async Task<ActionResult> SetMainPhoto(int photoId)
     {
       var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(User.GetUsername());
+      if (!user.Photos.Any()) return BadRequest("This photo hasn't been approved yet");
       var photo = user.Photos.FirstOrDefault(x => x.Id == photoId);
+      if (!photo.IsApproved) return BadRequest("This photo hasn't been approved yet");
       if (photo.IsMain) return BadRequest("This is your main photo");
       var currentMain = user.Photos.FirstOrDefault(x => x.IsMain);
       if (currentMain != null) currentMain.IsMain = false;

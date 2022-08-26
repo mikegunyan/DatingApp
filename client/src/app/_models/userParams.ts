@@ -9,6 +9,6 @@ export class UserParams {
   orderBy = 'lastActive';
 
   constructor(user: User) {
-    this.gender = user.gender == 'male' ? 'female' : 'male';
+    this.gender = user.gender == 'male' ? 'male' : 'female';
   }
 }
