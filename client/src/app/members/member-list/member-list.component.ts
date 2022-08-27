@@ -18,8 +18,8 @@ export class MemberListComponent implements OnInit {
   userParams: UserParams;
   user: User;
   genderList = [
-    {value: 'male', display: 'Males'},
-    {value: 'female', display: 'Females'},
+    {value: 'female', display: 'Males'},
+    {value: 'male', display: 'Females'},
     {value: 'both', display: 'Both'}
   ];
 
@@ -32,6 +32,7 @@ export class MemberListComponent implements OnInit {
   }
 
   loadMembers() {
+    console.log(this.userParams)
     if (this.userParams.minAge < 18) this.userParams.minAge = 18;
     if (this.userParams.maxAge > 150) this.userParams.maxAge = 150;
     this.memberService.setUserParams(this.userParams);
