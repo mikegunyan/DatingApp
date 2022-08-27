@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Photo } from 'src/app/_models/photo';
+import { User } from 'src/app/_models/user';
 import { AdminService } from 'src/app/_services/admin.service';
+import { MessageService } from 'src/app/_services/message.service';
 
 @Component({
   selector: 'app-photo-management',
@@ -10,8 +12,9 @@ import { AdminService } from 'src/app/_services/admin.service';
 export class PhotoManagementComponent implements OnInit {
   photos: Photo[] = [];
   index: number = 0;
+  user: User;
 
-  constructor(private adminService: AdminService) { }
+  constructor(private adminService: AdminService, private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.getPhotosToModerate();
@@ -19,6 +22,7 @@ export class PhotoManagementComponent implements OnInit {
 
   getPhotosToModerate() {
     this.adminService.getPhotosToModerate().subscribe(photos => {
+      console.table(photos)
       this.photos = photos;
     })
   }
@@ -40,12 +44,18 @@ export class PhotoManagementComponent implements OnInit {
   }
 
   approve() {
-    console.log('Approved')
-    this.photos.splice(this.index, 1);
+    var username = this.photos[this.index].username;
+    // this.adminService.approvePhoto(this.photos[this.index].id).subscribe(() => {
+      this.messageService.sendMessage(username, 'Your photo was approved!');
+    //   this.photos.splice(this.index, 1);
+    // })
   }
 
   reject() {
-    console.log('Rejected')
-    this.photos.splice(this.index, 1);
+    var username = this.photos[this.index].username;
+    // this.adminService.deletePhoto(this.photos[this.index].id).subscribe(() => {
+      this.messageService.sendMessage(username, 'Your photo was unable to be approved! It was in violation of our code of conduct!');
+    //   this.photos.splice(this.index, 1);
+    // })
   }
 }

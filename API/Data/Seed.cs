@@ -37,7 +37,12 @@ namespace API.Data
 
             var admin = new AppUser
             {
-                UserName = "admin"
+                UserName = "admin",
+                KnownAs = "Admin",
+                DateOfBirth = DateTime.Today.AddYears(-99),
+                Created = DateTime.Today.AddYears(-99),
+                City = "Private",
+                Country = "Private",
             };
 
             await userManager.CreateAsync(admin, "qqqqqqqq");

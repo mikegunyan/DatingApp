@@ -20,6 +20,14 @@ export class AdminService {
     return this.http.get<Photo[]>(this.baseURl + 'admin/photos-to-moderate');
   }
 
+  approvePhoto(photoId: number) {
+    return this.http.put(this.baseURl +'admin/approve-photo/' + photoId, {});
+  }
+
+  deletePhoto(photoId: number) {
+    return this.http.delete(this.baseURl +'admin/delete-photo/' + photoId);
+  }
+
   updateUserRoles(username: string, roles: string[]) {
     return this.http.post(this.baseURl + 'admin/edit-roles/' + username + '?roles=' + roles, {})
   }

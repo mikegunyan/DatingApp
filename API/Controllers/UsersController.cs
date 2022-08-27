@@ -60,13 +60,15 @@ namespace API.Controllers
     [HttpPost("add-photo")]
     public async Task<ActionResult<PhotoDto>> AddPhoto(IFormFile file)
     {
-      var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(User.GetUsername());
+      var username = User.GetUsername();
+      var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(username);
       var result = await _photoService.AddPhotoAsync(file);
       if (result.Error != null) return BadRequest(result.Error.Message);
       var photo = new Photo
       {
         Url = result.SecureUrl.AbsoluteUri,
-        PublicId = result.PublicId
+        PublicId = result.PublicId,
+        Username = username
       };
 
       // if (user.Photos.Count == 0)

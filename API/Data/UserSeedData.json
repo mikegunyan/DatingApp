@@ -14,7 +14,8 @@
     "Photos": [
       {
         "Url": "https://randomuser.me/api/portraits/women/39.jpg",
-        "IsMain": true
+        "IsMain": true,
+        "Username": "ann"
       }
     ]
   },
@@ -33,7 +34,8 @@
     "Photos": [
       {
         "Url": "https://randomuser.me/api/portraits/women/44.jpg",
-        "IsMain": true
+        "IsMain": true,
+        "Username": "tracy"
       }
     ]
   },
@@ -52,7 +54,8 @@
     "Photos": [
       {
         "Url": "https://randomuser.me/api/portraits/women/99.jpg",
-        "IsMain": true
+        "IsMain": true,
+        "Username": "joan"
       }
     ]
   },
@@ -71,7 +74,8 @@
     "Photos": [
       {
         "Url": "https://randomuser.me/api/portraits/women/26.jpg",
-        "IsMain": true
+        "IsMain": true,
+        "Username": "jan"
       }
     ]
   },
@@ -90,7 +94,8 @@
     "Photos": [
       {
         "Url": "https://randomuser.me/api/portraits/women/48.jpg",
-        "IsMain": true
+        "IsMain": true,
+        "Username": "liz"
       }
     ]
   },
@@ -110,7 +115,8 @@
     "Photos": [
       {
         "Url": "https://randomuser.me/api/portraits/men/80.jpg",
-        "IsMain": true
+        "IsMain": true,
+        "Username": "mike"
       }
     ]
   },
@@ -129,7 +135,8 @@
     "Photos": [
       {
         "Url": "https://randomuser.me/api/portraits/men/25.jpg",
-        "IsMain": true
+        "IsMain": true,
+        "Username": "bill"
       }
     ]
   },
@@ -148,7 +155,8 @@
     "Photos": [
       {
         "Url": "https://randomuser.me/api/portraits/men/29.jpg",
-        "IsMain": true
+        "IsMain": true,
+        "Username": "adam"
       }
     ]
   },
@@ -167,7 +175,8 @@
     "Photos": [
       {
         "Url": "https://randomuser.me/api/portraits/men/25.jpg",
-        "IsMain": true
+        "IsMain": true,
+        "Username": "sam"
       }
     ]
   },
@@ -186,7 +195,8 @@
     "Photos": [
       {
         "Url": "https://randomuser.me/api/portraits/men/71.jpg",
-        "IsMain": true
+        "IsMain": true,
+        "Username": "nick"
       }
     ]
   }

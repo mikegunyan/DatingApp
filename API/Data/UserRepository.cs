@@ -22,6 +22,16 @@ namespace API.Data
       _context = context;
     }
 
+    public void ApprovePhoto(Photo photo)
+    {
+        _context.Photos.Update(photo);
+    }
+
+    public void DeletePhoto(Photo photo)
+    {
+        _context.Photos.Remove(photo);
+    }
+
     public async Task<MemberDto> GetMemberAsync(string username, bool isCurrentUser = false)
     {
         var query = _context.Users
@@ -57,17 +67,27 @@ namespace API.Data
           userParams.PageNumber, userParams.PageSize);
     }
 
-    public async Task<IEnumerable<PhotoDto>> GetUnApprovedPhotosAsync()
+    public async Task<Photo> GetPhoto(int photoId)
+    {
+        return await _context.Photos
+            .IgnoreQueryFilters()
+            .Where(p => p.Id == photoId)
+            .FirstAsync();
+    }
+
+    public async Task<IEnumerable<UnApprovedDto>> GetUnApprovedPhotosAsync()
     {
         return await _context.Photos
             .IgnoreQueryFilters()
             .Where(p => !p.IsApproved)
-            .Select(u => new PhotoDto
+            .Select(u => new UnApprovedDto
             {
                 Id = u.Id,
                 Url = u.Url,
                 IsMain = u.IsMain,
-                IsApproved = u.IsApproved
+                IsApproved = u.IsApproved,
+                AppUserId = u.AppUserId,
+                Username = u.Username
             }).ToListAsync();
     }
 

@@ -54,13 +54,7 @@ namespace API.Controllers
         public async Task<ActionResult> DeleteLike(int likedUserId)
         {
             var sourceUserId = User.GetUserId();
-            
             var like =  await _unitOfWork.LikesRepository.GetUserLike(sourceUserId, likedUserId);
-            Console.WriteLine("-------------------------");
-            Console.WriteLine(like);
-            Console.WriteLine(sourceUserId);
-            Console.WriteLine(likedUserId);
-            Console.WriteLine("-------------------------");
             _unitOfWork.LikesRepository.DeleteLike(like);
             return Ok();
         }
