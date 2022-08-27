@@ -35,7 +35,7 @@ namespace API.Controllers
         var gender = await _unitOfWork.UserRepository.GetUserGender(User.GetUsername());
         userParams.CurrentUsername = User.GetUsername();
         if (string.IsNullOrEmpty(userParams.Gender))
-            userParams.Gender = gender == "male" ? "male" : "female";
+            userParams.Gender = gender == "male" ? "female" : "male";
         var users = await _unitOfWork.UserRepository.GetMembersAsync(userParams);
         Response.AddPaginationHeader(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPages);
         return Ok(users);
