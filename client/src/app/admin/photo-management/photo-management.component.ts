@@ -33,9 +33,8 @@ export class PhotoManagementComponent implements OnInit {
 
   getPhotosToModerate() {
     this.adminService.getPhotosToModerate().subscribe(photos => {
-      console.table(photos)
       this.photos = photos;
-      this.messageService.createHubConnection(this.user, photos[0].username);
+      if (photos.length > 0) this.messageService.createHubConnection(this.user, photos[0].username);
     })
   }
 

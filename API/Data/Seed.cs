@@ -39,10 +39,11 @@ namespace API.Data
             {
                 UserName = "admin",
                 KnownAs = "Admin",
-                DateOfBirth = DateTime.Today.AddYears(-99),
-                Created = DateTime.Today.AddYears(-99),
+                DateOfBirth = DateTime.Today.AddYears(-199),
+                Created = DateTime.Today.AddYears(-199),
                 City = "Private",
                 Country = "Private",
+                Gender = "both"
             };
 
             await userManager.CreateAsync(admin, "qqqqqqqq");
