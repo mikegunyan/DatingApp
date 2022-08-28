@@ -1,7 +1,10 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { take } from 'rxjs/operators';
 import { Member } from 'src/app/_models/member';
 import { Pagination } from 'src/app/_models/pagination';
+import { User } from 'src/app/_models/user';
+import { AccountService } from 'src/app/_services/account.service';
 import { MembersService } from 'src/app/_services/members.service';
 import { PresenceService } from 'src/app/_services/presence.service';
 
@@ -12,13 +15,19 @@ import { PresenceService } from 'src/app/_services/presence.service';
 })
 export class MemberCardComponent implements OnInit {
   @Input() member: Member;
+  user: User;
   @Input() isLiked: boolean;
   @Input() predicate = 'liked';
   @Input() pageNumber = 1;
   @Input() pageSize = 10;
   @Output() newMembers = new EventEmitter<Member[]>();
 
-  constructor(private memberService: MembersService, private toastr: ToastrService, public presence: PresenceService) { }
+  constructor(
+    private memberService: MembersService,
+    public accountService: AccountService,
+    private toastr: ToastrService,
+    public presence: PresenceService
+  ) {}
 
   ngOnInit(): void {
   }

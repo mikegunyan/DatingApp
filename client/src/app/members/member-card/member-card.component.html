@@ -8,7 +8,7 @@
       <li class="list-inline-item" *ngIf="isLiked">
         <button class="btn btn-primary btn-sm" (click)="deleteLike(member)"><i class="fa fa-heart" style="color: red;"></i></button>
       </li>
-      <li class="list-inline-item" *ngIf="!isLiked">
+      <li class="list-inline-item" *ngIf="!isLiked && (accountService.currentUser$ | async).username !== 'admin'">
         <button class="btn btn-primary btn-sm" (click)="addLike(member)"><i class="fa fa-heart"></i></button>
       </li>
       <li class="list-inline-item">
