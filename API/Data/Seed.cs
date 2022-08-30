@@ -11,10 +11,10 @@ namespace API.Data
         {
             if (await userManager.Users.AnyAsync()) return;
 
-            var userData = await System.IO.File.ReadAllTextAsync("Data/UserSeedData.json");
-            var users = JsonSerializer.Deserialize<List<AppUser>>(userData);
+            // var userData = await System.IO.File.ReadAllTextAsync("Data/UserSeedData.json");
+            // var users = JsonSerializer.Deserialize<List<AppUser>>(userData);
 
-            if (users == null) return;
+            // if (users == null) return;
 
             var roles = new List<AppRole>
             {
@@ -28,19 +28,19 @@ namespace API.Data
                 await roleManager.CreateAsync(role);
             }
 
-            foreach (var user in users)
-            {
-                user.UserName = user.UserName.ToLower();
-                await userManager.CreateAsync(user, "qqqqqqqq");
-                await userManager.AddToRoleAsync(user, "Member");
-            }
+            // foreach (var user in users)
+            // {
+            //     user.UserName = user.UserName.ToLower();
+            //     await userManager.CreateAsync(user, "qqqqqqqq");
+            //     await userManager.AddToRoleAsync(user, "Member");
+            // }
 
             var admin = new AppUser
             {
                 UserName = "admin",
                 KnownAs = "Admin",
-                DateOfBirth = DateTime.Today.AddYears(-199),
-                Created = DateTime.Today.AddYears(-199),
+                DateOfBirth = DateTime.UtcNow.AddYears(-199),
+                Created = DateTime.UtcNow.AddYears(-199),
                 City = "Private",
                 Country = "Private",
                 Gender = "both"
